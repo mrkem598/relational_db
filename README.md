@@ -1,5 +1,5 @@
-# relational_db
-Introduction to database design
+
+# Introduction to database design
 
 This article/tutorial will teach the basis of relational database design and explains how to make a good database design. It is a rather long text, but we advise to read all of it. Designing a database is in fact fairly easy, but there are a few rules to stick to. It is important to know what these rules are, but more importantly is to know why these rules exist, otherwise you will tend to make mistakes!
 Standardization makes your data model flexible and that makes working with your data much easier. Please, take the time to learn these rules and apply them! The database used in this article is designed with our database design and modeling tool DeZign for Databases.
