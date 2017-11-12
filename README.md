@@ -266,23 +266,24 @@ With relational databases, the most popular conceptual and logical data modeling
 
 Later in the design phase of database development, the actual relational database is built as part of the physical design activity. This activity may consist of an enterprise data administrator turning over an ERD, representing a logical model of the database, to a DBA to implement to build the database, using a specific RDBMS and host platform. The physical database design phase also includes the specification of physical data layouts, indexing and issues related to database tuning for better performance. The details of relational database performance and tuning are covered in the advanced relational databases course.
 
-Development
+### Development
 
 The database development approach with entity/relationship diagramming represents a top-down development approach, where the logical design phase is at a high level of abstraction, although the determination of entities and their entities (discussed in detail in the next section) from all of the required data elements is a bottom-up approach.
 
 The DDL SQL used to construct the physical relational database and the DML SQL to initially populate the database will be discussed in module 4.
 
-Implementation
+### Implementation
 
 Once the database is built, the implementation phase takes place. During this phase, data is added (called "populating the database"), user forms and reports are built, and end-user queries are developed. Legacy system data may also need to be added to the database, possibly using conversion routines to reformat the data for the new system.
 
-Acceptance Testing, Delivery, and Maintenance
+### Acceptance Testing, Delivery, and Maintenance
 
 When the database application is complete, the end user conducts system acceptance testing and, if the system is able to meet their requirements, accepts delivery from the developer. System delivery usually includes training for the end users, the delivery of system documentation and a period (usually years) of maintenance. When the new system is no longer able to meet the end-user’s needs at some later time the SDLC process begins anew on a new system.
+***
+# II. Data Modeling Process
+***
 
-II. Data Modeling Process
-
-End-User Interviews
+### End-User Interviews
 
 During the requirements analysis phase there are several techniques to gather the end user's requirements, including end-user interviews, questionnaires, observing the existing operation, and conducting a functional analysis of existing system forms, reports, and documentation. Note that in this course we are stressing the gathering of requirements to develop the database, not the development of the application software.
 
@@ -290,14 +291,16 @@ The purpose of end-user interviews is to meet with various levels of the enterpr
 
 In a large system, the requirements analysis process consists of a series of data-gathering interview sessions in which the developers listen carefully and, through experience, ask the end users data-related questions so as to clarify the data that comprise the customer's business.
 
-Entities, Attributes, and Relationships
+### Entities, Attributes, and Relationships
 
 The database developer strives to identify primarily three aspects of the data:
 
 entities
 attributes
 relationships
+```
 Simply stated, the entities are the very important "things" that exist within the enterprise. By discussing the system requirements with the end user, the developer should be able to identify these "things" as the "nouns."
+``` 
 
 During requirements gathering, the developer should be able to identify the characteristics of the entities as attributes, or "adjectives."
 
@@ -312,20 +315,21 @@ The seasoned database developer will strive to capture business rule statements 
 An example of a business rule might be that "all customers have unique account numbers". Another rule might be that "customers that place three or more orders per month are permitted a 10 percent discount on all subsequent orders during the remainder of the quarter." As we saw in module 2, the former rule is rather easy to include via declarative integrity (i.e., DDL SQL), while the latter might require procedural integrity techniques (e.g., triggers).
 
 Although the business rules may not be evident from an ERD, it is important that they be captured and documented. As we shall soon see, some of the basic business rules can be captured as cardinalities on the ERD (i.e., which sides of the relationships are for the "one" side and which are for the "many" side).
-
-III. Entity Relationship Diagramming
-
+***
+# III. Entity Relationship Diagramming
+*** 
 Once the entities, attributes, and relationships of the enterprise data are understood, the database developer constructs a data model for a relational database, usually in the form of an entity/relationship diagram. The ERD is actually a picture of the data, or a conceptual model, for an enterprise. The ERD does not show the functions the business performs, which is part of the application software design, a separate topic.
 
 The ERD and the accompanying diagramming technique were developed by Peter Chen in 1976. There are now a number of different notations used for ERDs. Although there are no standards, there are a number of conventions.
 
 Entities are usually indicated as rectangular boxes, and are the important "things" that have been noted by the database developer about the end-user's business. The entity names inside the boxes are in all capital letters. An example of an entity, the CUSTOMER entity, is shown in figure 3.1. Attributes are shown as words inside ovals with lines that connect to the entities of which they are characteristics. The many attributes of the CUSTOMER attributes are shown in figure 3.1, below.
 
-Figure 3.1
 
 
 
+**
 Entity and Attribute Types
+**
 
 The CUSTOMER entity of figure 3.1 is an example of a strong entity. Strong entities have a unique key value of their own within the end user's application called a key attribute. The key attribute of an entity is the unique identifier of each instance of an entity. The Customer ID attribute is the key attribute of the CUSTOMER entity in figure 3.1. Key attributes are underlined.
 
@@ -336,22 +340,23 @@ A composite attribute is actually composed of the more atomic, simple attributes
 A multi-valued attribute exists for an entity when there is some indeterminate number of possible simple entities that might exist. The Phone Number attribute in figure 3.1 is an example of a multi-valued attribute, since the CUSTOMER entity may have various types of phone numbers: home phone, business phone, fax phone, cell phone number 1, cell phone number 2, etc. Multi-valued attributes are shown with a double oval.
 
 A derived attribute can be calculated from another attribute of an entity. For the CUSTOMER entity we might have added a derived attribute of Customer Longevity, which could be calculated from the Initial Contact Date attribute.
-
-Relationship Types
-
-There are three types of relationships between entities in an ERD: one-to-one, one-to-many, and many-to-many. Note that the many-to-one relationship is the same as the one-to-many relationship, just viewed from the opposite direction.
+***
+## Relationship Types
+***
+```
+There are three types of relationships between entities in an ERD: 
+* one-to-one
+* one-to-many
+* many-to-many
+Note that the many-to-one relationship is the same as the one-to-many relationship, just viewed from the opposite direction.
+```
 
 As stated earlier, there are no standard notations for ERDs. The greatest variety in the ERD notations is the way in which relationships are depicted. Frequently relationships are shown as diamonds with names that are between two or more entities. As shown in figure 3.2A, which uses the Chen notation, the "1" and "M" indicators represent the types of relationships that exist between two adjacent entities. Figure 3.2B shows an alternate notation using "crow's feet" on the "many side" of the relationship. Note that there are a number of other popular ERD notations besides the two shown below.
 
-Figure 3.2A
 
-
-
-Figure 3.2B
-
-fig3_2b_case.gif (2283 bytes)
-
-Relationship Sentences and Participation
+***
+## Relationship Sentences and Participation
+***
 
 One popular technique to determine the proper relationships between entities is to construct a set of sentence pairs between all related entities. All sentences must begin with the word "Each." An entity name is then listed in singular case after the word "Each." One sentence describes the relationship in one direction and the other sentence describes the relationship in the other direction. Each pair of sentences describes the overall relationship between the two entities. This technique is based on the CASE*Method approach and is used by the Oracle Designer CASE tool.
 
